@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, non_constant_identifier_names
+// ignore_for_file: prefer_const_constructors, non_constant_identifier_names, dead_code
 
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
@@ -17,6 +17,17 @@ Widget Logo(BuildContext context) {
   );
 }
 
+Widget Icono_decore(BuildContext context) {
+  return Container(
+    width: MediaQuery.sizeOf(context).width * 0.20,
+    height: MediaQuery.sizeOf(context).height * 0.10,
+    decoration: BoxDecoration(
+        image: DecorationImage(
+            filterQuality: FilterQuality.high,
+            fit: BoxFit.cover,
+            image: AssetImage("assets/Icono_decore.png"))),
+  );
+}
 
 Widget AnimacionCarga() {
   return Container(
@@ -29,12 +40,10 @@ Widget AnimacionCarga() {
   );
 }
 
-Widget CajaTexto(
-    {required String hintText,
-    required TextEditingController controller,
-    required BuildContext context
-    //required VoidCallback onPressed,
-    }) {
+Widget CajaTexto({
+  required String hintText,
+  required TextEditingController controller,
+}) {
   return TextField(
     autocorrect: false,
     cursorColor: Colors.black,
@@ -61,18 +70,14 @@ Widget CajaTexto(
   );
 }
 
-Widget CajaTexto_oculto(
-    {required String hintText,
-    required TextEditingController controller,
-    required BuildContext context
-    //required VoidCallback onPressed,
-    }) {
+Widget CajaTextoIcono({
+  required String hintText,
+  required TextEditingController controller,
+}) {
   return TextField(
     autocorrect: false,
-    obscureText: true,
-    obscuringCharacter: "*",
-    autofocus: false,
     cursorColor: Colors.black,
+    autofocus: false,
     controller: controller,
     textAlignVertical: TextAlignVertical.center,
     textAlign: TextAlign.start,
@@ -90,6 +95,53 @@ Widget CajaTexto_oculto(
       focusedBorder: OutlineInputBorder(
         borderSide: BorderSide(color: Color.fromARGB(255, 158, 165, 216)),
         borderRadius: BorderRadius.circular(22),
+      ),
+      suffixIcon: Icon(
+        Icons.people,
+        color: Colors.black,
+        size: 20,
+      ),
+    ),
+  );
+}
+
+Widget CajaTextoOculto({
+  required String hintText,
+  required TextEditingController controller,
+}) {
+  bool obscureText = true;
+
+  return TextField(
+    autocorrect: false,
+    obscureText: obscureText,
+    obscuringCharacter: "*",
+    autofocus: false,
+    cursorColor: Colors.black,
+    controller: controller,
+    textAlignVertical: TextAlignVertical.center,
+    textAlign: TextAlign.start,
+    style: TextStyle(fontSize: 23),
+    decoration: InputDecoration(
+      contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+      filled: true,
+      fillColor: const Color.fromARGB(255, 158, 165, 216),
+      helperText: hintText,
+      helperStyle: estiloTextoAzul(23),
+      enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: Color.fromARGB(255, 158, 165, 216)),
+        borderRadius: BorderRadius.circular(22),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: Color.fromARGB(255, 158, 165, 216)),
+        borderRadius: BorderRadius.circular(22),
+      ),
+      suffixIcon: IconButton(
+        color: Colors.black,
+        iconSize: 20,
+        icon: Icon(obscureText ? Icons.visibility : Icons.visibility_off),
+        onPressed: () {
+          obscureText = !obscureText;
+        },
       ),
     ),
   );
@@ -101,8 +153,9 @@ Widget Boton({
   required VoidCallback onpressed,
 }) {
   return ElevatedButton(
-    style: estiloBotonAzul,
-      onPressed: onpressed, child: TextosBlanco(texto: texto, size: size));
+      style: estiloBotonAzul,
+      onPressed: onpressed,
+      child: TextosBlanco(texto: texto, size: size));
 }
 
 Widget TextosBlanco({required String texto, required double size}) {
