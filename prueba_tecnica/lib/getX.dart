@@ -9,3 +9,7 @@ class CajaTextoController extends GetxController {
     obscureText.toggle();
   }
 }
+
+class DocumentoController extends GetxController {
+  var documento = ''.obs;
+}

@@ -17,15 +17,16 @@ Widget Logo(BuildContext context) {
   );
 }
 
-Widget Icono_decore(BuildContext context) {
+Widget Icono_decore(
+    BuildContext context, String logo, double alto, double ancho) {
   return Container(
-    width: MediaQuery.sizeOf(context).width * 0.20,
-    height: MediaQuery.sizeOf(context).height * 0.10,
+    width: MediaQuery.sizeOf(context).width * ancho,
+    height: MediaQuery.sizeOf(context).height * alto,
     decoration: BoxDecoration(
         image: DecorationImage(
             filterQuality: FilterQuality.high,
             fit: BoxFit.cover,
-            image: AssetImage("assets/Icono_decore.png"))),
+            image: AssetImage(logo))),
   );
 }
 
@@ -56,8 +57,8 @@ Widget CajaTexto({
       contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
       filled: true,
       fillColor: const Color.fromARGB(255, 158, 165, 216),
-      helperText: hintText,
-      helperStyle: estiloTextoAzul(23),
+      hintText: hintText,
+      hintStyle: estiloTextoAzul(23),
       enabledBorder: OutlineInputBorder(
         borderSide: BorderSide(color: Color.fromARGB(255, 158, 165, 216)),
         borderRadius: BorderRadius.circular(22),
@@ -86,8 +87,8 @@ Widget CajaTextoIcono({
       contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
       filled: true,
       fillColor: const Color.fromARGB(255, 158, 165, 216),
-      helperText: hintText,
-      helperStyle: estiloTextoAzul(23),
+      hintText: hintText,
+      hintStyle: estiloTextoAzul(23),
       enabledBorder: OutlineInputBorder(
         borderSide: BorderSide(color: Color.fromARGB(255, 158, 165, 216)),
         borderRadius: BorderRadius.circular(22),
@@ -125,8 +126,8 @@ Widget CajaTextoOculto({
       contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
       filled: true,
       fillColor: const Color.fromARGB(255, 158, 165, 216),
-      helperText: hintText,
-      helperStyle: estiloTextoAzul(23),
+      hintText: hintText,
+      hintStyle: estiloTextoAzul(23),
       enabledBorder: OutlineInputBorder(
         borderSide: BorderSide(color: Color.fromARGB(255, 158, 165, 216)),
         borderRadius: BorderRadius.circular(22),

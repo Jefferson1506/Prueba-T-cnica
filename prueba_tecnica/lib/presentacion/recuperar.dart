@@ -22,16 +22,16 @@ class Recuperacion extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: MediaQuery.of(context).size.height * 0.85,
-            width: 120,
-            height: 120,
-            left: MediaQuery.of(context).size.width * 0.7,
-            child: Icono_decore(context),
+            top: MediaQuery.of(context).size.height * 0.80,
+            left: MediaQuery.of(context).size.width * 0.68,
+            width: MediaQuery.of(context).size.width * 0.30,
+            height: MediaQuery.of(context).size.height * 0.15,
+            child: Icono_decore(context, "assets/Icono_decore.png", 0.10, 0.5),
           ),
 
           Positioned(
             top: MediaQuery.of(context).size.height * 0.2,
-            left: MediaQuery.of(context).size.width * 0.05,
+            left: MediaQuery.of(context).size.width * 0.03,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -45,7 +45,7 @@ class Recuperacion extends StatelessWidget {
                     Navigator.pop(context);
                   },
                 ),
-                TextosAzul(texto: "Restablecimiento de contraseña", size: 30)
+                TextosAzul(texto: "Restablecimiento de contraseña", size: 28)
               ],
             ),
           ),
@@ -72,7 +72,7 @@ class Recuperacion extends StatelessWidget {
                     width: MediaQuery.of(context).size.width * 0.80,
                     height: MediaQuery.of(context).size.height * 0.1,
                     child: CajaTexto(
-                      hintText: "Confirmacion De Contraseña",
+                      hintText: "Confirmación De Contraseña",
                       controller: claveVerificar,
                     ),
                   ),

@@ -7,7 +7,6 @@ TextStyle estiloTextoAzul(double size) {
   return GoogleFonts.grenze(
       color: Color.fromARGB(255, 5, 10, 48),
       fontWeight: FontWeight.w400,
-      fontStyle: FontStyle.italic,
       fontSize: size);
 }
 
@@ -15,7 +14,6 @@ TextStyle estiloTextoBlanco(double size) {
   return GoogleFonts.grenze(
       color: Color.fromARGB(255, 255, 255, 255),
       fontWeight: FontWeight.w400,
-      fontStyle: FontStyle.italic,
       fontSize: size);
 }
 

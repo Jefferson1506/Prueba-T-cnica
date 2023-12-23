@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:prueba_tecnica/presentacion/recuperar.dart';
+import 'package:prueba_tecnica/presentacion/registro.dart';
 import 'package:prueba_tecnica/widget.dart';
 
 void main() => runApp(MyApp());
@@ -89,7 +90,14 @@ class LoginPage extends StatelessWidget {
                     child: TextosAzul(texto: "Autenticación", size: 17),
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Registro(),
+                        ),
+                      );
+                    },
                     child: TextosAzul(texto: "¿No tienes cuenta?", size: 17),
                   ),
                   TextButton(
