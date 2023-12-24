@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+
+import 'package:prueba_tecnica/presentacion/menuInicial.dart';
 import 'package:prueba_tecnica/presentacion/recuperar.dart';
+
 import 'package:prueba_tecnica/presentacion/registro.dart';
-import 'package:prueba_tecnica/widget.dart';
+import 'package:prueba_tecnica/widgets/widget.dart';
 
 void main() => runApp(MyApp());
 
@@ -43,11 +46,14 @@ class LoginPage extends StatelessWidget {
               width: MediaQuery.of(context).size.width * 0.9,
               height: MediaQuery.of(context).size.height * 0.35,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Container(
+                    margin: EdgeInsets.only(
+                      top: MediaQuery.of(context).size.height * 0.10,
+                    ),
                     width: MediaQuery.of(context).size.width * 0.80,
                     height: MediaQuery.of(context).size.height * 0.1,
                     child: CajaTextoIcono(
@@ -72,7 +78,20 @@ class LoginPage extends StatelessWidget {
             child: Container(
               width: MediaQuery.of(context).size.width * 0.75,
               height: MediaQuery.of(context).size.height * 0.055,
-              child: Boton(texto: "Ingresar", size: 23, onpressed: () {}),
+              child: Boton(
+                  texto: "Ingresar",
+                  size: 23,
+                  onpressed: () {
+                    /*   validarCampos(
+                        usuario: usuario, clave: clave, context: context);*/
+
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => menuInicial(),
+                      ),
+                    );
+                  }),
             ),
           ),
           Positioned(
@@ -102,12 +121,7 @@ class LoginPage extends StatelessWidget {
                   ),
                   TextButton(
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => Recuperacion(),
-                        ),
-                      );
+                  
                     },
                     child: TextosAzul(
                       texto: "¿Has olvidado tu contraseña?",

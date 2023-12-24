@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors,, use_key_in_widget_constructors
 import 'package:flutter/material.dart';
-import 'package:prueba_tecnica/widget.dart';
+import 'package:prueba_tecnica/widgets/widget.dart';
 
 class Recuperacion extends StatelessWidget {
   // Declarar los controladores fuera del método build

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "405213201146",
+    "firebase_url": "https://pruebabyte4bit-default-rtdb.firebaseio.com",
+    "project_id": "pruebabyte4bit",
+    "storage_bucket": "pruebabyte4bit.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:405213201146:android:ae184ce072b5685d12ff43",
+        "android_client_info": {
+          "package_name": "com.example.prueba_tecnica"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "405213201146-fiktbcogooc2n65jiur6rgd245uqcjuc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCF-y5XGGgZM44U905VNRCcF8I0ZA2rH6Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "405213201146-fiktbcogooc2n65jiur6rgd245uqcjuc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

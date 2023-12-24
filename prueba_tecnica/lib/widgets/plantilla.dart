@@ -17,10 +17,29 @@ TextStyle estiloTextoBlanco(double size) {
       fontSize: size);
 }
 
+TextStyle estiloTextoNegro(double size) {
+  return GoogleFonts.grenze(
+      color: Color.fromARGB(255, 0, 0, 0),
+      fontWeight: FontWeight.w400,
+      fontSize: size);
+}
+
+
+
 ButtonStyle estiloBotonAzul = ElevatedButton.styleFrom(
     backgroundColor: Color.fromARGB(255, 18, 34, 157),
     side: BorderSide(
       color: Color.fromARGB(255, 18, 34, 157),
+    ),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(10),
+    ));
+
+
+    ButtonStyle estiloBotonRojo = ElevatedButton.styleFrom(
+    backgroundColor: Color.fromARGB(255, 157, 34, 18),
+    side: BorderSide(
+      color: Color.fromARGB(255,  157, 34, 18),
     ),
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(10),

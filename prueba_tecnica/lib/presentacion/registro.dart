@@ -3,13 +3,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:prueba_tecnica/getX.dart';
-import 'package:prueba_tecnica/widget.dart';
+import 'package:prueba_tecnica/widgets/getX.dart';
+import 'package:prueba_tecnica/widgets/widget.dart';
 
 class Registro extends StatelessWidget {
   final TextEditingController correo = TextEditingController();
   final TextEditingController nombre = TextEditingController();
-   final TextEditingController clave = TextEditingController();
+  final TextEditingController clave = TextEditingController();
+  final TextEditingController ti = TextEditingController();
   final DocumentoController documentoController =
       Get.put(DocumentoController());
 
@@ -33,7 +34,7 @@ class Registro extends StatelessWidget {
           ),
           //cuerpo
           Positioned(
-              top: MediaQuery.of(context).size.height * 0.35,
+              top: MediaQuery.of(context).size.height * 0.30,
               child: Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -42,9 +43,9 @@ class Registro extends StatelessWidget {
                   ),
                 ),
                 width: MediaQuery.of(context).size.width * 1,
-                height: MediaQuery.of(context).size.height * 0.65,
+                height: MediaQuery.of(context).size.height * 0.7,
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.max,
                   children: [
@@ -69,8 +70,9 @@ class Registro extends StatelessWidget {
                       ),
                     ),
                     Container(
-                        width: MediaQuery.of(context).size.width * 0.60,
-                        height: MediaQuery.of(context).size.height * 0.08,
+                        margin: EdgeInsets.symmetric(vertical: 25),
+                        width: MediaQuery.of(context).size.width * 0.80,
+                        height: MediaQuery.of(context).size.height * 0.07,
                         decoration: BoxDecoration(
                           color: const Color.fromARGB(255, 18, 34, 157),
                           borderRadius: BorderRadius.circular(15),
@@ -82,7 +84,7 @@ class Registro extends StatelessWidget {
                                         .documento.value.isNotEmpty
                                     ? documentoController.documento.value
                                     : "Tipo De Documento",
-                                size: 20),
+                                size: 19),
                             trailing: Icon(
                               Icons.arrow_drop_down,
                               color: Colors.white,
@@ -98,7 +100,91 @@ class Registro extends StatelessWidget {
                             },
                           );
                         })),
-                    Row(
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.80,
+                      height: MediaQuery.of(context).size.height * 0.08,
+                      child: CajaTexto(
+                        hintText: "Identificación",
+                        controller: ti,
+                      ),
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.80,
+                      height: MediaQuery.of(context).size.height * 0.08,
+                      child: CajaTexto(
+                        hintText: "Nombre",
+                        controller: nombre,
+                      ),
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.80,
+                      height: MediaQuery.of(context).size.height * 0.08,
+                      child: CajaTexto(
+                        hintText: "Correo Electronico",
+                        controller: correo,
+                      ),
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.80,
+                      height: MediaQuery.of(context).size.height * 0.08,
+                      child: CajaTexto(
+                        hintText: "Contraseña",
+                        controller: clave,
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(top: 22),
+                      width: MediaQuery.of(context).size.width * 0.50,
+                      height: MediaQuery.of(context).size.height * 0.07,
+                      child: Boton(
+                          texto: "Registrarse", size: 20, onpressed: () {}),
+                    ),
+                  ],
+                ),
+              )),
+
+     /*     Positioned(
+            top: MediaQuery.of(context).size.height * 0.20,
+            left: MediaQuery.of(context).size.width * 0.65,
+            width: MediaQuery.of(context).size.width * 0.30,
+            height: MediaQuery.of(context).size.height * 0.20,
+            child: Icono_decore(context, "assets/cerdo_decore.png", 0.10, 0.10),
+          ),*/
+        ],
+      ),
+    );
+  }
+}
+
+Future selectorDocumento(BuildContext context) {
+  List<String> tiposDocumentos = [
+    'Cédula de Identidad',
+    'Pasaporte',
+    'Licencia de Conducir',
+    'Tarjeta de Residencia',
+    'Otro'
+  ];
+  return showDialog(
+    barrierColor: Color.fromARGB(160, 158, 165, 216),
+    context: context,
+    builder: (BuildContext context) {
+      return SimpleDialog(
+          title: Text('Selecciona una opción'),
+          children: tiposDocumentos.map((option) {
+            return SimpleDialogOption(
+              onPressed: () {
+                Navigator.pop(context, option);
+              },
+              child: Text(option),
+            );
+          }).toList());
+    },
+  );
+}
+
+//combos para la edad
+/*
+         Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         // Día
@@ -152,77 +238,5 @@ class Registro extends StatelessWidget {
                       ],
                       
                     ),
-                      Container(
-                          width: MediaQuery.of(context).size.width * 0.80,
-                          height: MediaQuery.of(context).size.height * 0.1,
-                          child: CajaTexto(
-                            hintText: "Nombre :",
-                            controller: nombre,
-                          ),
-                        ),
-                        Container(
-                          width: MediaQuery.of(context).size.width * 0.80,
-                          height: MediaQuery.of(context).size.height * 0.1,
-                          child: CajaTexto(
-                            hintText: "Contraseña",
-                            controller: clave,
-                          ),
-                        ),
-                        Container(
-                          width: MediaQuery.of(context).size.width * 0.80,
-                          height: MediaQuery.of(context).size.height * 0.1,
-                          child: CajaTexto(
-                            hintText: "Correo Electronico",
-                            controller: correo,
-                          ),
-                        ),
 
-                        Container(
-                          width: MediaQuery.of(context).size.width * 0.75,
-                          height: MediaQuery.of(context).size.height * 0.055,
-                          child: Boton(
-                              texto: "Registrarse", size: 23, onpressed: () {}),
-                        ),
-                  ],
-                ),
-              )),
-
-          Positioned(
-            top: MediaQuery.of(context).size.height * 0.20,
-            left: MediaQuery.of(context).size.width * 0.65,
-            width: MediaQuery.of(context).size.width * 0.30,
-            height: MediaQuery.of(context).size.height * 0.20,
-            child:
-                Icono_decore(context, "assets/cerdo_decorate.png", 0.10, 0.10),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-Future selectorDocumento(BuildContext context) {
-  List<String> tiposDocumentos = [
-    'Cédula de Identidad',
-    'Pasaporte',
-    'Licencia de Conducir',
-    'Tarjeta de Residencia',
-    'Otro'
-  ];
-  return showDialog(
-    barrierColor: Colors.grey,
-    context: context,
-    builder: (BuildContext context) {
-      return SimpleDialog(
-          title: Text('Selecciona una opción'),
-          children: tiposDocumentos.map((option) {
-            return SimpleDialogOption(
-              onPressed: () {
-                Navigator.pop(context, option);
-              },
-              child: Text(option),
-            );
-          }).toList());
-    },
-  );
-}
+*/
