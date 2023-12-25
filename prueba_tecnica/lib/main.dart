@@ -1,20 +1,26 @@
+// ignore_for_file: unused_local_variable, use_build_context_synchronously
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
-import 'package:prueba_tecnica/presentacion/menuInicial.dart';
-import 'package:prueba_tecnica/presentacion/recuperar.dart';
-
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:prueba_tecnica/logica/validacion.dart';
 import 'package:prueba_tecnica/presentacion/registro.dart';
 import 'package:prueba_tecnica/widgets/widget.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
 
 void main() => runApp(MyApp());
-
+ 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(useMaterial3: true),
-      home: LoginPage(),
+    return GraphQLProvider(
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(useMaterial3: true),
+        home: LoginPage(),
+      ),
     );
   }
 }
@@ -81,16 +87,22 @@ class LoginPage extends StatelessWidget {
               child: Boton(
                   texto: "Ingresar",
                   size: 23,
-                  onpressed: () {
-                    /*   validarCampos(
-                        usuario: usuario, clave: clave, context: context);*/
+                  onpressed: () async {
+                    var estado = validarCampos(
+                        usuario: usuario, clave: clave, context: context);
 
+                    if (estado) {
+                      AnimacionCarga(context);
+                      var arco = await petecion();
+                      Navigator.pop(context);
+                    }
+                    /*
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => menuInicial(),
                       ),
-                    );
+                    );*/
                   }),
             ),
           ),
@@ -105,10 +117,6 @@ class LoginPage extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   TextButton(
-                    onPressed: () {},
-                    child: TextosAzul(texto: "Autenticación", size: 17),
-                  ),
-                  TextButton(
                     onPressed: () {
                       Navigator.push(
                         context,
@@ -120,9 +128,7 @@ class LoginPage extends StatelessWidget {
                     child: TextosAzul(texto: "¿No tienes cuenta?", size: 17),
                   ),
                   TextButton(
-                    onPressed: () {
-                  
-                    },
+                    onPressed: () {},
                     child: TextosAzul(
                       texto: "¿Has olvidado tu contraseña?",
                       size: 17,
@@ -136,4 +142,28 @@ class LoginPage extends StatelessWidget {
       ),
     );
   }
+}
+
+Future<String> petecion() async {
+  await Future.delayed(
+      Duration(seconds: 3)); // Simula la duración de la petición
+  return "Respuesta de la petición";
+}
+
+Future<UserCredential> signInWithGoogle() async {
+  // Trigger the authentication flow
+  final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+  // Obtain the auth details from the request
+  final GoogleSignInAuthentication? googleAuth =
+      await googleUser?.authentication;
+
+  // Create a new credential
+  final credential = GoogleAuthProvider.credential(
+    accessToken: googleAuth?.accessToken,
+    idToken: googleAuth?.idToken,
+  );
+
+  // Once signed in, return the UserCredential
+  return await FirebaseAuth.instance.signInWithCredential(credential);
 }

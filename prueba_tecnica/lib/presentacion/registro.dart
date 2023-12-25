@@ -1,8 +1,8 @@
-// ignore_for_file: prefer_const_constructors,, use_key_in_widget_constructors, prefer_const_literals_to_create_immutables, sized_box_for_whitespace
+// ignore_for_file: prefer_const_constructors,, use_key_in_widget_constructors, prefer_const_literals_to_create_immutables, sized_box_for_whitespace, must_be_immutable
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
+import 'package:prueba_tecnica/logica/validacion.dart';
 import 'package:prueba_tecnica/widgets/getX.dart';
 import 'package:prueba_tecnica/widgets/widget.dart';
 
@@ -10,14 +10,23 @@ class Registro extends StatelessWidget {
   final TextEditingController correo = TextEditingController();
   final TextEditingController nombre = TextEditingController();
   final TextEditingController clave = TextEditingController();
-  final TextEditingController ti = TextEditingController();
+  final TextEditingController id = TextEditingController();
+  var nuevoDocumento = "";
   final DocumentoController documentoController =
       Get.put(DocumentoController());
+
+  void limpiador() {
+    correo.clear();
+    nombre.clear();
+    clave.clear();
+    id.clear();
+    nuevoDocumento = "";
+    documentoController.documento = "".obs;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       body: Stack(
         alignment: Alignment.topCenter,
         children: [
@@ -62,6 +71,7 @@ class Registro extends StatelessWidget {
                             icon: Icon(Icons.arrow_back),
                             onPressed: () {
                               Navigator.pop(context);
+                              limpiador();
                             },
                           ),
                           TextosAzul(
@@ -90,10 +100,9 @@ class Registro extends StatelessWidget {
                               color: Colors.white,
                             ),
                             onTap: () async {
-                              var nuevoDocumento =
-                                  await selectorDocumento(context);
-
                               try {
+                                nuevoDocumento =
+                                    await selectorDocumento(context);
                                 documentoController.documento.value =
                                     nuevoDocumento;
                               } catch (e) {}
@@ -105,7 +114,7 @@ class Registro extends StatelessWidget {
                       height: MediaQuery.of(context).size.height * 0.08,
                       child: CajaTexto(
                         hintText: "Identificación",
-                        controller: ti,
+                        controller: id,
                       ),
                     ),
                     Container(
@@ -137,13 +146,23 @@ class Registro extends StatelessWidget {
                       width: MediaQuery.of(context).size.width * 0.50,
                       height: MediaQuery.of(context).size.height * 0.07,
                       child: Boton(
-                          texto: "Registrarse", size: 20, onpressed: () {}),
+                          texto: "Registrarse",
+                          size: 20,
+                          onpressed: () {
+                            validarCamposRegistro(
+                                nombre: nombre.text.toString(),
+                                clave: clave.text.toString(),
+                                nuevoDocumento: nuevoDocumento.toString(),
+                                correo: correo.text.toString(),
+                                id: id.text.toString(),
+                                context: context);
+                          }),
                     ),
                   ],
                 ),
               )),
 
-     /*     Positioned(
+          /*     Positioned(
             top: MediaQuery.of(context).size.height * 0.20,
             left: MediaQuery.of(context).size.width * 0.65,
             width: MediaQuery.of(context).size.width * 0.30,

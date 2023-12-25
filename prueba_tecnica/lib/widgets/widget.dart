@@ -33,15 +33,16 @@ Widget Icono_decore(
   );
 }
 
-Widget AnimacionCarga() {
-  return Container(
-    width: 100,
-    height: 100,
-    child: LoadingAnimationWidget.inkDrop(
-      color: Colors.amber,
-      size: 70,
-    ),
-  );
+Future AnimacionCarga(BuildContext context) {
+  return showDialog(
+      barrierColor: Color.fromARGB(180, 244, 246, 252),
+      context: context,
+      builder: (BuildContext context) {
+        return LoadingAnimationWidget.threeRotatingDots(
+          color: const Color.fromARGB(255, 5, 10, 48),
+          size: 70,
+        );
+      });
 }
 
 Widget CajaTexto({
@@ -254,7 +255,7 @@ mostrarAlert(BuildContext context2) {
             },
             child: Text(
               'Cancelar',
-              style: TextStyle(color: Colors.red,fontSize: 20),
+              style: TextStyle(color: Colors.red, fontSize: 20),
             ),
           ),
           TextButton(
@@ -264,7 +265,7 @@ mostrarAlert(BuildContext context2) {
             },
             child: Text(
               'Guardar',
-              style: TextStyle(color: Colors.blue,fontSize: 20),
+              style: TextStyle(color: Colors.blue, fontSize: 20),
             ),
           ),
         ],
